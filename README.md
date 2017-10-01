@@ -4,7 +4,7 @@ Susie Chen, Ian Lam, Tim Loznok, Donna Tong, Jonathan (Yi Ou) Zhu - In Alphabeti
 
 Soundly Mobile App
 
-A crossplatform mobile app built using Java framework and PhoneGab that utilizes Google Maps functionality to optimize routes with the least amount of crime happened, primarily targetting students or parents of younger students who may have to walk to school.
+A crossplatform (demo using IOS Platform) mobile app built using Java framework and PhoneGab that utilizes Google Maps functionality to optimize routes with the least amount of crime happened, primarily targetting students or parents of younger students who may have to walk to school.
 
 Proposed Functionalities:
 1. Using Google Maps library to calculate route from student's school address to their desired address (or vice versa), using City of Vancouver's weekly updated crime rate JSON datafile, algorithmically sort the suggested walking routes by lowest crime rates.
