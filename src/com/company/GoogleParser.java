@@ -20,6 +20,7 @@ public class GoogleParser {
         try {
             JSONObject resp = new JSONObject(json);
             JSONArray routes = resp.getJSONArray("routes");
+            System.out.println(routes.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
