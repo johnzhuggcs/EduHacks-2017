@@ -2,7 +2,7 @@
 
 Susie Chen, Ian Lam, Tim Loznok, Donna Tong, Jonathan (Yi Ou) Zhu - In Alphabetical Order
 
-SafeLearn (Placeholder name)
+Soundly Mobile App
 
 A crossplatform mobile app built using Java framework and PhoneGab that utilizes Google Maps functionality to optimize routes with the least amount of crime happened, primarily targetting students or parents of younger students who may have to walk to school.
 
