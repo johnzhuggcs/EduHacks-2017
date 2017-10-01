@@ -29,7 +29,7 @@ public class GoogleParser {
 
     }
 
-    public List<List<HashMap>> actuallyParsing(String json){
+    public List<List<HashMap>> parseToLatLon(String json){
         try {
             JSONObject response = new JSONObject(json);
             JSONArray routes = response.getJSONArray("routes");

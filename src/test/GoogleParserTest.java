@@ -9,7 +9,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
 
 public class GoogleParserTest {
 
@@ -52,7 +51,7 @@ public class GoogleParserTest {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             GoogleParser googleParser = new GoogleParser();
-            List<List<HashMap>> result = googleParser.actuallyParsing(jsonText);
+            List<List<HashMap>> result = googleParser.parseToLatLon(jsonText);
             System.out.println(jsonText);
             System.out.println("parsed info");
             //System.out.println(result.toString());

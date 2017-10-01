@@ -35,7 +35,7 @@ public class ServiceHandler {
     public List<List<HashMap>> parsedGeoCode(String json){
         GoogleParser googleParser = new GoogleParser();
 
-        List<List<HashMap>> result = googleParser.actuallyParsing(json);
+        List<List<HashMap>> result = googleParser.parseToLatLon(json);
         return result;
     }
 
