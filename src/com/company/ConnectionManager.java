@@ -15,6 +15,7 @@ public class ConnectionManager {
     private String origin = "origin=";
     private String dst = "&destination=";
     private String alternative = "&alternative=";
+    private String travelmode = "&travelmode=";
     private String key = "&key=AIzaSyDGfTWMXhGEkmUGYn9E5ZFVO1J7krYEHvk";
 
     private InputStream inputStream;
@@ -23,7 +24,8 @@ public class ConnectionManager {
         this.origin += origin;
         this.dst += dst;
         this.alternative += "true";
-        googleurl+= this.origin + this.dst + this.alternative + key;
+        this.travelmode += "walking";
+        googleurl+= this.origin + this.dst + this.alternative + this.travelmode + key;
         setConnection();
         //System.out.println(googleurl);
     }

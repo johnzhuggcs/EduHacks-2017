@@ -108,8 +108,21 @@ public class GoogleParser {
     }
      */
     public GoogleParser(String json){
+        try {
+            JSONObject response = new JSONObject(json);
+            JSONArray routes = response.getJSONArray("route");
+            String[] parsedRouteCoords;
 
-        
+            for(int x = 0; x<routes.length() - 1; x++){
+                routeDataInitializer(routes.getJSONObject(x));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String routeDataInitializer(JSONObject route){
 
     }
 
