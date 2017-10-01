@@ -15,16 +15,28 @@ public class ServiceHandler {
         start = strt;
         end = dst;
 
-        ConnectionManager connectionManager = new ConnectionManager(start, end);
+        String json = DirectionQuerier();
 
-        String json = connectionManager.getResponse();
 
-        GoogleParser googleParser = new GoogleParser();
 
-        List<List<HashMap>> result = googleParser.actuallyParsing(json);
+        List<List<HashMap>> result = parsedGeoCode(json);
 
         //return result;
 
+    }
+
+    public String DirectionQuerier(){
+        ConnectionManager connectionManager = new ConnectionManager(start, end);
+
+        String json = connectionManager.getResponse();
+        return json;
+    }
+
+    public List<List<HashMap>> parsedGeoCode(String json){
+        GoogleParser googleParser = new GoogleParser();
+
+        List<List<HashMap>> result = googleParser.actuallyParsing(json);
+        return result;
     }
 
 }
