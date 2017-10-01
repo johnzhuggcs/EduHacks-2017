@@ -26,6 +26,7 @@ public class GoogleParserTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private static String readAll(Reader rd) throws IOException {
