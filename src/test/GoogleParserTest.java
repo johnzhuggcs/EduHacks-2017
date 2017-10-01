@@ -1,7 +1,6 @@
 package test;
 
 import com.company.GoogleParser;
-import com.oracle.tools.packager.IOUtils;
 import org.junit.Test;
 
 import java.io.*;
@@ -20,8 +19,8 @@ public class GoogleParserTest {
             String jsonText = readAll(rd);
             System.out.println(jsonText);
 
-            GoogleParser p = new GoogleParser();
-            p.parseResponce(jsonText);
+            //GoogleParser p = new GoogleParser();
+            //p.parseResponce(jsonText);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
