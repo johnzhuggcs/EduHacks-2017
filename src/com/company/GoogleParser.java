@@ -8,6 +8,9 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class GoogleParser {
 
@@ -16,128 +19,85 @@ public class GoogleParser {
      * @param json, must be string, will not be passed in if NULL
      *
      * {
-    "status": "OK",
-    "geocoded_waypoints" : [
-    {
-    "geocoder_status" : "OK",
-    "place_id" : "ChIJ7cv00DwsDogRAMDACa2m4K8",
-    "types" : [ "locality", "political" ]
-    },
-    {
-    "geocoder_status" : "OK",
-    "place_id" : "ChIJ69Pk6jdlyIcRDqM1KDY3Fpg",
-    "types" : [ "locality", "political" ]
-    },
-    {
-    "geocoder_status" : "OK",
-    "place_id" : "ChIJgdL4flSKrYcRnTpP0XQSojM",
-    "types" : [ "locality", "political" ]
-    },
-    {
-    "geocoder_status" : "OK",
-    "place_id" : "ChIJE9on3F3HwoAR9AhGJW_fL-I",
-    "types" : [ "locality", "political" ]
-    }
-    ],
-    "routes": [ {
-    "summary": "I-40 W",
-    "legs": [ {
-    "steps": [ {
-    "travel_mode": "DRIVING",
-    "start_location": {
-    "lat": 41.8507300,
-    "lng": -87.6512600
-    },
-    "end_location": {
-    "lat": 41.8525800,
-    "lng": -87.6514100
-    },
-    "polyline": {
-    "points": "a~l~Fjk~uOwHJy@P"
-    },
-    "duration": {
-    "value": 19,
-    "text": "1 min"
-    },
-    "html_instructions": "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eS Morgan St\u003c/b\u003e toward \u003cb\u003eW Cermak Rd\u003c/b\u003e",
-    "distance": {
-    "value": 207,
-    "text": "0.1 mi"
-    }
-    },
-    ...
-    ... additional steps of this leg
-    ...
-    ... additional legs of this route
-    "duration": {
-    "value": 74384,
-    "text": "20 hours 40 mins"
-    },
-    "distance": {
-    "value": 2137146,
-    "text": "1,328 mi"
-    },
-    "start_location": {
-    "lat": 35.4675602,
-    "lng": -97.5164276
-    },
-    "end_location": {
-    "lat": 34.0522342,
-    "lng": -118.2436849
-    },
-    "start_address": "Oklahoma City, OK, USA",
-    "end_address": "Los Angeles, CA, USA"
-    } ],
-    "copyrights": "Map data ©2010 Google, Sanborn",
-    "overview_polyline": {
-    "points": "a~l~Fjk~uOnzh@vlbBtc~@tsE`vnApw{A`dw@~w\\|tNtqf@l{Yd_Fblh@rxo@b}@xxSfytAblk@xxaBeJxlcBb~t@zbh@jc|Bx}C`rv@rw|@rlhA~dVzeo@vrSnc}Axf]fjz@xfFbw~@dz{A~d{A|zOxbrBbdUvpo@`cFp~xBc`Hk@nurDznmFfwMbwz@bbl@lq~@loPpxq@bw_@v|{CbtY~jGqeMb{iF|n\\~mbDzeVh_Wr|Efc\\x`Ij{kE}mAb~uF{cNd}xBjp]fulBiwJpgg@|kHntyArpb@bijCk_Kv~eGyqTj_|@`uV`k|DcsNdwxAott@r}q@_gc@nu`CnvHx`k@dse@j|p@zpiAp|gEicy@`omFvaErfo@igQxnlApqGze~AsyRzrjAb__@ftyB}pIlo_BflmA~yQftNboWzoAlzp@mz`@|}_@fda@jakEitAn{fB_a]lexClshBtmqAdmY_hLxiZd~XtaBndgC"
-    },
-    "warnings": [ ],
-    "waypoint_order": [ 0, 1 ],
-    "bounds": {
-    "southwest": {
-    "lat": 34.0523600,
-    "lng": -118.2435600
-    },
-    "northeast": {
-    "lat": 41.8781100,
-    "lng": -87.6297900
-    }
-    }
-    } ]
-    }
+
      */
-    public GoogleParser(String json){
+    public GoogleParser(){
+
+        boolean yes = true;
+
+
+    }
+
+    public HashMap[][] actuallyParsing(String json){
         try {
             JSONObject response = new JSONObject(json);
-            JSONArray routes = response.getJSONArray("route");
-            String[] parsedRouteCoords;
+            JSONArray routes = response.getJSONArray("routes");
+            HashMap[][] parsedRouteCoords = new HashMap[][]{};
+
+
 
             for(int x = 0; x<routes.length() - 1; x++){
-                routeDataInitializer(routes.getJSONObject(x));
+                parsedRouteCoords[x] = routeDataInitializer(routes.getJSONObject(x));
             }
+            return parsedRouteCoords;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 
-    public String routeDataInitializer(JSONObject route){
-
-    }
-
-    public void parseResponce(String json){
+    public HashMap[] routeDataInitializer(JSONObject route){
         try {
-            JSONObject resp = new JSONObject(json);
-            JSONArray routes = resp.getJSONArray("routes");
-            //System.out.println(routes.toString());
-
+            JSONArray leg = route.getJSONArray("legs");
+            HashMap[] parsedRouteSteps = new HashMap[]{};
+            for(int x = 0; x<leg.length() - 1;x++){
+                parsedRouteSteps = legDataInitializer(leg.getJSONObject(x), parsedRouteSteps);
+            }
+            return parsedRouteSteps;
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return null;
+    }
 
+    public HashMap[] legDataInitializer(JSONObject leg, HashMap[] parsedRouteSteps){
+        try {
+            JSONArray steps = leg.getJSONArray("steps");
+
+            for(int x = 0; x<steps.length() - 1;x++){
+                parsedRouteSteps[x] = startEndInitializer(steps.getJSONObject(x));
+            }
+            return parsedRouteSteps;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
+
+    // [route, route ...]
+    // [[step, step], [step, step]]
+    // [[{[lat, lon]:[lat, lon]}, {[lat, lon]:[lat, lon]}]]
+
+    public HashMap startEndInitializer(JSONObject step){
+        try {
+            JSONObject start = step.getJSONObject("start_location");
+            List<String> startGeo = Arrays.asList(start.get("lat").toString(), start.get("lon").toString());
+
+            JSONObject end = step.getJSONObject("end_location");
+            List<String> endGeo = Arrays.asList(end.get("lat").toString(), end.get("lon").toString());
+
+            HashMap<List<String>, List<String>> stepCoords = new HashMap<>();
+
+            stepCoords.put(startGeo, endGeo);
+
+            return stepCoords;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     // parser
 
