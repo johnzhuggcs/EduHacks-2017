@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 
 public class GoogleParser {
 
+    // Manages JSON
     public GoogleParser(){
 
     }
@@ -27,5 +28,7 @@ public class GoogleParser {
 
 
     }
+
+    // parser
 
 }

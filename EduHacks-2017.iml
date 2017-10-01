@@ -9,6 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="java-json" level="project" />
     <orderEntry type="module-library">
+<<<<<<< HEAD
       <library name="JUnit5">
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-RC2.jar!/" />
@@ -19,6 +20,8 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+=======
+>>>>>>> 189ffe2fcd2a0a141b4b17ceefa24b4e20bbb209
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-4.12.jar!/" />
