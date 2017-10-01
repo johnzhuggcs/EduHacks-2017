@@ -14,6 +14,8 @@ public class ConnectionManager {
     private String googleurl = "https://maps.googleapis.com/maps/api/directions/json?";
     private String origin = "origin=";
     private String dst = "&destination=";
+    private String alternative = "&alternative=";
+    private String travelmode = "&travelmode=";
     private String key = "&key=AIzaSyDGfTWMXhGEkmUGYn9E5ZFVO1J7krYEHvk";
 
     private InputStream inputStream;
@@ -21,7 +23,9 @@ public class ConnectionManager {
     public ConnectionManager(String origin, String dst){
         this.origin += origin;
         this.dst += dst;
-        googleurl+= this.origin + this.dst + key;
+        this.alternative += "true";
+        this.travelmode += "walking";
+        googleurl+= this.origin + this.dst + this.alternative + this.travelmode + key;
         setConnection();
         //System.out.println(googleurl);
     }
