@@ -4,10 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,7 +22,6 @@ public class GoogleParser {
 
         boolean yes = true;
 
-
     }
 
     public List<List<HashMap>> actuallyParsing(String json){
@@ -34,8 +29,6 @@ public class GoogleParser {
             JSONObject response = new JSONObject(json);
             JSONArray routes = response.getJSONArray("routes");
             List<List<HashMap>> parsedRouteCoords = new ArrayList<List<HashMap>>();
-
-
 
             for(int x = 0; x<routes.length(); x++){
                 parsedRouteCoords.add(routeDataInitializer(routes.getJSONObject(x)));
@@ -64,7 +57,6 @@ public class GoogleParser {
     public List<HashMap> legDataInitializer(JSONObject leg, List<HashMap> parsedRouteSteps){
         try {
             JSONArray steps = leg.getJSONArray("steps");
-
             for(int x = 0; x<steps.length();x++){
                 parsedRouteSteps.add( startEndInitializer(steps.getJSONObject(x)));
             }
