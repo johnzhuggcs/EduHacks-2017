@@ -52,15 +52,15 @@ public class GoogleParserTest {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             GoogleParser googleParser = new GoogleParser();
-            HashMap[][] result = googleParser.actuallyParsing(jsonText);
+            List<List<HashMap>> result = googleParser.actuallyParsing(jsonText);
             System.out.println(jsonText);
             System.out.println("parsed info");
-            System.out.println(result.toString());
+            //System.out.println(result.toString());
 
-            HashMap[] temp = result[0];
+            List<HashMap> temp = result.get(0);
 
-            for(int x =0;x<1;x++){
-                HashMap tempMap = temp[x];
+            for(int x =0;x<temp.size();x++){
+                HashMap tempMap = temp.get(0);
                 for (Object name: tempMap.keySet()){
 
                     Object key =name;

@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public class GoogleParser {
 
     /** manages JSON
      *
-     * @param json, must be string, will not be passed in if NULL
+     *
      *
      * {
 
@@ -28,16 +29,16 @@ public class GoogleParser {
 
     }
 
-    public HashMap[][] actuallyParsing(String json){
+    public List<List<HashMap>> actuallyParsing(String json){
         try {
             JSONObject response = new JSONObject(json);
             JSONArray routes = response.getJSONArray("routes");
-            HashMap[][] parsedRouteCoords = new HashMap[][]{};
+            List<List<HashMap>> parsedRouteCoords = new ArrayList<List<HashMap>>();
 
 
 
-            for(int x = 0; x<routes.length() - 1; x++){
-                parsedRouteCoords[x] = routeDataInitializer(routes.getJSONObject(x));
+            for(int x = 0; x<routes.length(); x++){
+                parsedRouteCoords.add(routeDataInitializer(routes.getJSONObject(x)));
             }
             return parsedRouteCoords;
         } catch (JSONException e) {
@@ -46,11 +47,11 @@ public class GoogleParser {
         return null;
     }
 
-    public HashMap[] routeDataInitializer(JSONObject route){
+    public List<HashMap> routeDataInitializer(JSONObject route){
         try {
             JSONArray leg = route.getJSONArray("legs");
-            HashMap[] parsedRouteSteps = new HashMap[]{};
-            for(int x = 0; x<leg.length() - 1;x++){
+            List<HashMap> parsedRouteSteps = new ArrayList<HashMap>();
+            for(int x = 0; x<leg.length();x++){
                 parsedRouteSteps = legDataInitializer(leg.getJSONObject(x), parsedRouteSteps);
             }
             return parsedRouteSteps;
@@ -60,12 +61,12 @@ public class GoogleParser {
         return null;
     }
 
-    public HashMap[] legDataInitializer(JSONObject leg, HashMap[] parsedRouteSteps){
+    public List<HashMap> legDataInitializer(JSONObject leg, List<HashMap> parsedRouteSteps){
         try {
             JSONArray steps = leg.getJSONArray("steps");
 
-            for(int x = 0; x<steps.length() - 1;x++){
-                parsedRouteSteps[x] = startEndInitializer(steps.getJSONObject(x));
+            for(int x = 0; x<steps.length();x++){
+                parsedRouteSteps.add( startEndInitializer(steps.getJSONObject(x)));
             }
             return parsedRouteSteps;
         } catch (JSONException e) {
@@ -82,10 +83,10 @@ public class GoogleParser {
     public HashMap startEndInitializer(JSONObject step){
         try {
             JSONObject start = step.getJSONObject("start_location");
-            List<String> startGeo = Arrays.asList(start.get("lat").toString(), start.get("lon").toString());
+            List<String> startGeo = Arrays.asList(start.get("lat").toString(), start.get("lng").toString());
 
             JSONObject end = step.getJSONObject("end_location");
-            List<String> endGeo = Arrays.asList(end.get("lat").toString(), end.get("lon").toString());
+            List<String> endGeo = Arrays.asList(end.get("lat").toString(), end.get("lng").toString());
 
             HashMap<List<String>, List<String>> stepCoords = new HashMap<>();
 
