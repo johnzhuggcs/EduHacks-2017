@@ -52,13 +52,13 @@ public class GoogleParserTest {
             String jsonText = readAll(rd);
             GoogleParser googleParser = new GoogleParser();
             List<List<HashMap>> result = googleParser.parseToLatLon(jsonText);
-            System.out.println(jsonText);
+            //System.out.println(jsonText);
             System.out.println("parsed info");
             //System.out.println(result.toString());
 
-            List<HashMap> temp = result.get(0);
+            //List<HashMap> temp = result.get(0);
 
-            for(int x =0;x<temp.size();x++){
+            /*for(int x =0;x<temp.size();x++){
                 HashMap tempMap = temp.get(0);
                 for (Object name: tempMap.keySet()){
 
@@ -70,7 +70,7 @@ public class GoogleParserTest {
                 }
 
 
-            }
+            }*/
 
 
             //GoogleParser p = new GoogleParser();
