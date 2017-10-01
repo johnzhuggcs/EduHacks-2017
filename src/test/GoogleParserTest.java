@@ -1,7 +1,9 @@
 package test;
 
 import com.company.GoogleParser;
+import com.oracle.tools.packager.IOUtils;
 import org.junit.Test;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +18,7 @@ public class GoogleParserTest {
             InputStream is = url.openStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
-            //System.out.println(jsonText);
+            System.out.println(jsonText);
 
             GoogleParser p = new GoogleParser();
             p.parseResponce(jsonText);

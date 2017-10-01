@@ -15,12 +15,17 @@ public class GoogleParser {
     private String dst = "&destination=";
     private String key = "&key=AIzaSyDGfTWMXhGEkmUGYn9E5ZFVO1J7krYEHvk";
 
-
+    public GoogleParser(String origin, String dst){
+//        googleurl += googleurl + this.origin + dst + key
+//        origin.concat(origin);
+//        dst.concat(dst);
+//        googleurl.concat(origin);
+    }
     public void parseResponce(String json){
         try {
             JSONObject resp = new JSONObject(json);
             JSONArray routes = resp.getJSONArray("routes");
-            System.out.println(routes.toString());
+            //System.out.println(routes.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
